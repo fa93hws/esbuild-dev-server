@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "baseUrl": "./",
+    "outDir": "dist"
+  },
+  "exclude": ["playground"]
+}

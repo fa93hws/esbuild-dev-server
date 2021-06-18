@@ -1,0 +1,41 @@
+{
+  "name": "esbuild-dev-tool",
+  "version": "0.0.2",
+  "description": "run esbuild in hot mode",
+  "main": "index.js",
+  "bin": "bin/esbuild-dev-tool.js",
+  "dependencies": {
+    "@minify-html/js": "^0.4.11",
+    "chalk": "^4.1.1",
+    "lodash": "^4.17.21",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.170",
+    "esbuild": "^0.12.9",
+    "jest": "^27.0.4",
+    "prettier": "^2.3.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.4"
+  },
+  "peerDependencies": {
+    "esbuild": "^0.12.9"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fa93hws/esbuild-dev-server.git"
+  },
+  "keywords": [
+    "esbuild"
+  ],
+  "author": "fa93hws",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fa93hws/esbuild-dev-server/issues"
+  },
+  "homepage": "https://github.com/fa93hws/esbuild-dev-server#readme"
+}
