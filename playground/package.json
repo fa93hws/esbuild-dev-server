@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node ./run-tool.js build --config ./classic-build/config/build.js",
-    "serve": "node ./run-tool.js serve --config ./classic-build/config/dev.js",
+    "build:watch": "node ./run-tool.js build --config ./classic-build/config/dev.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
