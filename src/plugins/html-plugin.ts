@@ -22,6 +22,9 @@ function createHTML(args: htmlPluginParams, result: BuildResult) {
     console.log('not output found, html plugin will not start');
     return;
   }
+  if (!fs.existsSync(args.template)) {
+    throw new Error(`template file@${args.template} does not exist`);
+  }
   const outputfiles = Object.keys(result.metafile.outputs)
     .map(file => path.join(process.cwd(), file));
   const outdir = path.dirname(args.output);
@@ -32,7 +35,8 @@ function createHTML(args: htmlPluginParams, result: BuildResult) {
   const cssFiles = outputfiles
     .filter((f) => path.extname(f) === '.css')
     .map((f) => path.relative(outdir, f));
-  let htmlOutputContent = renderEjs(args.template)({ jsFiles, cssFiles });
+  const templateConent = fs.readFileSync(args.template, { encoding: 'utf-8' });
+  let htmlOutputContent = renderEjs(templateConent)({ jsFiles, cssFiles });
   if (args.minify) {
     const cfg = minifyHtml.createConfiguration({ minifyJs: false });
     htmlOutputContent = minifyHtml.minify(htmlOutputContent, cfg);

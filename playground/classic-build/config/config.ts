@@ -1,5 +1,4 @@
 import * as path from 'path';
-import * as fs from 'fs';
 import type { Options } from '../../../src/config-type';
 import { htmlPluginFactory } from '../../../src/plugins/html-plugin';
 
@@ -9,7 +8,7 @@ export function getEsbuildConfig(mode: 'development' | 'production'): Options {
   }
   const root = path.resolve(__dirname, '..');
   const htmlPlugin = htmlPluginFactory({
-    template: fs.readFileSync(path.join(root, 'index.ejs'), { encoding: 'utf-8' }),
+    template: path.join(root, 'index.ejs'),
     minify: mode === 'production',
     output: path.join(root, 'dist', 'index.html'),
   });
