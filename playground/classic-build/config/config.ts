@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import type { Options } from '../../../src/config-type';
-import { htmlPluginFactory } from '../../../src/html-plugin/html-plugin';
+import { htmlPluginFactory } from '../../../src/plugins/html-plugin';
 
 export function getEsbuildConfig(mode: 'development' | 'production'): Options {
   if (mode !== 'development' && mode !== 'production') {

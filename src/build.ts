@@ -4,6 +4,7 @@ import { build } from 'esbuild';
 import type { BuildOptions } from 'esbuild';
 import { yellow } from 'chalk';
 
+import { logTimePlugin } from './plugins/log-time-plugin';
 import type { Options } from './config-type';
 
 type CliArgs = {
@@ -45,9 +46,15 @@ function handler({ config, watch }: CliArgs) {
     : path.resolve(process.cwd(), config);
   // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires
   const options: Options = require(absConfigPath);
+  const { esbuildOptions } = options;
+  if (esbuildOptions.plugins == null) {
+    esbuildOptions.plugins = [logTimePlugin];
+  } else if (!esbuildOptions.plugins.includes(logTimePlugin)) {
+    esbuildOptions.plugins.push(logTimePlugin);
+  }
   const buildPromise = watch
-    ? watchBuild(options.esbuildOptions)
-    : buildOnce(options.esbuildOptions);
+    ? watchBuild(esbuildOptions)
+    : buildOnce(esbuildOptions);
     buildPromise.catch((e) => {
     console.error(e);
     process.exit(1);
