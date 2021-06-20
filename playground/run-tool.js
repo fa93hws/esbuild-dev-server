@@ -1,2 +1,2 @@
 require('./register-tsnode');
-require('../src/index').main();
+require('../src/cli').main();

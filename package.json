@@ -1,8 +1,8 @@
 {
   "name": "esbuild-dev-tool",
-  "version": "0.0.2",
+  "version": "0.1.2",
   "description": "run esbuild in hot mode",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": "bin/esbuild-dev-tool.js",
   "dependencies": {
     "@minify-html/js": "^0.4.11",
