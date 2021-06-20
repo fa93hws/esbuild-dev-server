@@ -1,4 +1,17 @@
 const path = require('path');
+const fs = require('fs');
+require('ts-node').register({
+  project: path.join(
+    __dirname,
+    '..',
+    '..',
+    '..',
+    'tsconfig.json',
+  ),
+  transpileOnly: true,
+});
+
+const { htmlPluginFactory } = require('../../../src/html-plugin/html-plugin');
 const root = path.resolve(__dirname, '..');
 
 module.exports = {
@@ -6,7 +19,6 @@ module.exports = {
     entryPoints: [path.join(root, 'index.tsx')],
     sourcemap: true,
     platform: 'browser',
-    write: false,
     bundle: true,
     outdir: path.join(root, 'dist'),
     define: {
@@ -15,12 +27,16 @@ module.exports = {
     minify: true,
     loader: {
       '.svg': 'file',
+      '.png': 'file',
     },
     entryNames: '[name]-[hash]',
     assetNames: 'assets/[name]-[hash]',
-  },
-  htmlOptions: {
-    entry: path.join(root, 'index.ejs'),
-    minify: true,
-  },
+    plugins: [
+      htmlPluginFactory({
+        template: fs.readFileSync(path.join(root, 'index.ejs')),
+        minify: true,
+        output: path.join(root, 'dist', 'index.html'),
+      }),
+    ],
+  }
 };

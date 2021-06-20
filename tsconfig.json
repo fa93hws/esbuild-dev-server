@@ -5,7 +5,11 @@
     "moduleResolution": "node",
     "target": "ESNext",
     "baseUrl": "./",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true
   },
-  "exclude": ["playground"]
+  "exclude": [
+    "playground",
+    "dist",
+  ]
 }
