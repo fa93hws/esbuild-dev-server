@@ -4,7 +4,7 @@ import img from './github.svg';
 
 const Component = () => (
   <div>
-    <div>Hello Worlds Mode={process.env.NODE_ENV}</div>
+    <div>Hello World Mode={process.env.NODE_ENV}</div>
     <img src={img} />
   </div>
 );
