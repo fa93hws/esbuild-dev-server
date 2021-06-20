@@ -1,0 +1,36 @@
+import * as path from 'path';
+import * as fs from 'fs';
+import type { Options } from '../../../src/config-type';
+import { htmlPluginFactory } from '../../../src/html-plugin/html-plugin';
+
+export function getEsbuildConfig(mode: 'development' | 'production'): Options {
+  if (mode !== 'development' && mode !== 'production') {
+    throw new Error('mode can only be development or production');
+  }
+  const root = path.resolve(__dirname, '..');
+  const htmlPlugin = htmlPluginFactory({
+    template: fs.readFileSync(path.join(root, 'index.ejs'), { encoding: 'utf-8' }),
+    minify: mode === 'production',
+    output: path.join(root, 'dist', 'index.html'),
+  });
+  return {
+    esbuildOptions: {
+      entryPoints: [path.join(root, 'index.tsx')],
+      sourcemap: true,
+      platform: 'browser',
+      bundle: true,
+      outdir: path.join(root, 'dist'),
+      define: {
+        'process.env.NODE_ENV': `"${mode}"`,
+      },
+      minify: mode === 'production',
+      loader: {
+        '.svg': 'file',
+        '.png': 'file',
+      },
+      entryNames: '[name]-[hash]',
+      assetNames: 'assets/[name]-[hash]',
+      plugins: [htmlPlugin],
+    }
+  }
+}
